@@ -13,12 +13,22 @@ import { Observable } from 'rxjs/Observable';
 })
 export class NavbarComponent implements OnInit {
   subsections: string[];
-  response: Object[];
+  response: News[];
   constructor(
     private store: Store<any>,
     private newsActions: NewsActions
   ) {
-    this.store.select(state => state.news).subscribe(data => this.response = data);
+    this.subsections = [];
+    this.store.select(state => state.news).subscribe(data => {
+      this.response = data.newsList;
+      if (this.response.length > 0) {
+        for (var i = 0; i < this.response.length; i++) {
+          this.subsections.push(this.response[i].subsection)
+        }
+        this.subsections = Array.from(new Set(this.subsections));
+      }
+    });
+
   }
 
   ngOnInit() {
@@ -26,7 +36,7 @@ export class NavbarComponent implements OnInit {
   }
 
   dispatchAction($event: string) {
-    this.store.dispatch(this.newsActions.FilterSubsection($event).payload)
+    this.store.dispatch(this.newsActions.FilterSubsection($event))
   }
 
 }

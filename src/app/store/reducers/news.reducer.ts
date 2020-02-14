@@ -42,7 +42,7 @@ export function news(state = initialState, action: Action) {
 }
 
 export const getNewsList = (state: any) => {
-    return state.newsList;
+    return state;
 };
 
 export const getFilter = (state: any) => {

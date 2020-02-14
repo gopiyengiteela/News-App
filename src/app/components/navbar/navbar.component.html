@@ -1,6 +1,6 @@
 <ul class="nav justify-content-center bg-dark">
   <li class="nav-item" *ngFor="let subsection of subsections">
-    <a href="javascript:void(0);" class="nav-link  text-white small" (click)="dispatchAction()">
+    <a routerLink="" class="nav-link  text-white small" (click)="dispatchAction($event.srcElement.innerText)">
       {{subsection}} </a>
   </li>
 </ul>

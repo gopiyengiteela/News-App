@@ -33,7 +33,7 @@ export class NewsComponent implements OnInit {
     this.obs = this.newsService.getSectionNews(sectionName);
     this.obs.subscribe(data => {
       this.store.dispatch(this.actions.LoadSectionNews(data.results));
-      this.sectionNewsList = data.results;
+      this.store.select(state => state.news).subscribe(data => this.sectionNewsList = data.newsList);
     });
   }
 }
